@@ -11,16 +11,19 @@ def print_list(list):
 
 def demo():
     s = urllib.urlopen('http://blog.kamidox.com')
-    # readline()读取一行
-    # for i in range(10):
-    #     print('line %d: %s' %(i+1 , s.readline()))
+    msg = s.info()
 
-    # readlines()读取全部,返回的是一个列表
-    # lines = s.readlines()
-    # print_list(lines)
+    #获取url的请求首部
+    print_list(msg.headers)
 
-    # getcode()是获取请求url的状态码
-    print(s.getcode())
+    #解析过的首部元祖
+    print_list(msg.items())
+
+    #单独获取某个首部
+    print(msg.getheader('Content-Type'))
+
+    #获取msg对象所有的方法属性
+    print_list(dir(msg))
 
 if __name__ == '__main__':
     demo()
