@@ -10,7 +10,7 @@ import urllib
 # data: POST 的application/x-www-form-urlencoded 格式的数据
 # 返回(filename, HTTPMessage),本地存入的文件名和HTTPMessage对象
 
-# reporthook:
+# reporthook:(包含了body内容,而没有包含首部的大小,所以得出的进度会超过100%)
 # 参数1：当前传输的块数
 # 参数2：块大小
 # 参数3：数据总大小
@@ -20,10 +20,12 @@ def print_list(list):
     for i in list:
         print(i)
 
+#可以打印当前的进度
+def progress(blk,blk_size,total_size):
+    print('%d/%d - %.02f%%' %(blk * blk_size, total_size, (float)(blk * blk_size) * 100 / total_size))
+
 def retrieve():
-    fname, msg = urllib.urlretrieve('http://blog.kamidox.com','index.html')
-    print(fname)
-    print_list(msg.items())
+    urllib.urlretrieve('http://blog.kamidox.com','index.html',reporthook=progress)
 
 if __name__ == '__main__':
     retrieve()
