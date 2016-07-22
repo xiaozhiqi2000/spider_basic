@@ -8,7 +8,9 @@ import cookielib
 
 # cookielib.CookieJar()用来获取服务器发送给客户端的cookies
 def handle_cookie():
+    # 提供解析并保存 cookie 的接口
     cookiejar = cookielib.CookieJar()
+    # 提供自动处理 cookie的功能
     handler = urllib2.HTTPCookieProcessor(cookiejar=cookiejar)
     opener = urllib2.build_opener(handler, urllib2.HTTPHandler(debuglevel=1),
                                   urllib2.HTTPSHandler(debuglevel=1))
@@ -17,6 +19,8 @@ def handle_cookie():
     s.close()
 
     print('=' * 80)
+
+    # 获取服务器发来的cookies
     print(cookiejar._cookies)
     print('=' * 80)
 
