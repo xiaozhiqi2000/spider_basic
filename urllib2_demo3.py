@@ -18,6 +18,15 @@
 import urllib2
 import urllib
 
+def request():
+    # 定制 HTTP头
+    headers = {'User-Agent': 'Mozilla/5.0', 'x-my-header': 'my value'}
+    req = urllib2.Request('http://blog.kamidox.com', headers=headers)
+    s = urllib2.urlopen(req)
+    print(s.read(100))
+    print(req.headers)
+    s.close()
+
 # urllib2.urlopen()函数不支持验证、cookie或者其它HTTP高级功能。要支持这些功能，必须使用build_opener()
 def request_post_debug():
     # POST 提交
@@ -37,6 +46,7 @@ def request_post_debug():
 
 if __name__ == '__main__':
     request_post_debug()
+
 
 
 
